@@ -14,10 +14,12 @@
         <maven.compiler.target>11</maven.compiler.target>
         <com.google.guava.version>28.0-jre</com.google.guava.version>
         <maven.assembly.plugin.version>3.1.1</maven.assembly.plugin.version>
+        <junit.version>5.5.0</junit.version>
     </properties>
 
     <modules>
         <module>hw01-maven</module>
+        <module>hw02-arraylist</module>
     </modules>
 
     <dependencyManagement>
@@ -31,6 +33,12 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>${maven.assembly.plugin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
