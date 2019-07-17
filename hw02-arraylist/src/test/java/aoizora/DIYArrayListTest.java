@@ -40,6 +40,7 @@ class DIYArrayListTest {
         List<Integer> src = new ArrayList<>();
         for (int i = 0; i < 20; ++i) {
             src.add(i);
+            arrayList.add(0);
         }
         Collections.copy(arrayList, src);
         assertEquals(src.size(), arrayList.size());
