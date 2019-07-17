@@ -49,6 +49,14 @@ public class DIYArrayList<E> extends AbstractList<E> implements List<E> {
         return (E) elementData[index];
     }
 
+    @Override
+    public E set(int index, E element) {
+        rangeCheck(index);
+        E old = (E) elementData[index];
+        elementData[index] = element;
+        return old;
+    }
+
     private void rangeCheck(int index) {
         if (index < 0 || index >= elementData.length) {
             throw new IndexOutOfBoundsException();
