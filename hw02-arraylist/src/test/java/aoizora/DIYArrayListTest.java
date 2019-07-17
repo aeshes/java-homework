@@ -11,7 +11,7 @@ class DIYArrayListTest {
 
     @Test
     void get() {
-        DIYArrayList arrayList = new DIYArrayList();
+        DIYArrayList<String> arrayList = new DIYArrayList<>();
         arrayList.add("a");
         assertEquals("a", arrayList.get(0));
     }
@@ -36,10 +36,10 @@ class DIYArrayListTest {
 
     @Test
     void testCopy() {
-        DIYArrayList<UUID> arrayList = new DIYArrayList<>();
-        List<UUID> src = new ArrayList<>();
+        DIYArrayList<Integer> arrayList = new DIYArrayList<>();
+        List<Integer> src = new ArrayList<>();
         for (int i = 0; i < 20; ++i) {
-            src.add(UUID.randomUUID());
+            src.add(i);
         }
         Collections.copy(arrayList, src);
         assertEquals(src.size(), arrayList.size());
