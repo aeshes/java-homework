@@ -151,12 +151,13 @@ public class DIYArrayList<E> implements List<E> {
 
     @Override
     public Iterator<E> iterator() {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        return new Itr();
     }
 
     @Override
     public Object[] toArray() {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        return Arrays.copyOf(elementData, size);
+        //throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     @Override
