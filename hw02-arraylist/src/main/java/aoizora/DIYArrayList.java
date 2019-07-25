@@ -6,10 +6,10 @@ public class DIYArrayList<E> implements List<E> {
 
     private Object[] elementData;
     private int size;
-    private final static int defaultCapacity = 5;
+    private final static int DEFAULT_CAPACITY = 5;
 
     public DIYArrayList() {
-        this(defaultCapacity);
+        this(DEFAULT_CAPACITY);
     }
 
     public DIYArrayList(int size) {

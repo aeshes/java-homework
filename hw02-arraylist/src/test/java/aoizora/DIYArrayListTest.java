@@ -57,4 +57,11 @@ class DIYArrayListTest {
         Collections.sort(arrayList, Comparator.naturalOrder());
         assertTrue(Ordering.natural().isOrdered(arrayList));
     }
+
+    @Test
+    void removeMustThrowException() {
+        DIYArrayList<Integer> arrayList = new DIYArrayList<>();
+        arrayList.add(1);
+        assertThrows(UnsupportedOperationException.class, () -> arrayList.remove(0));
+    }
 }
