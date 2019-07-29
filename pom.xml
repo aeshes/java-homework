@@ -21,6 +21,8 @@
         <module>hw01-maven</module>
         <module>hw02-arraylist</module>
         <module>hw03-reflection</module>
+        <module>hw04-automagic</module>
+        <module>hw04-automagic</module>
     </modules>
 
     <dependencyManagement>
