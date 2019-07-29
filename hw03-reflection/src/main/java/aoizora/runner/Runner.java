@@ -51,7 +51,8 @@ public class Runner {
 
     private void runBefore(Object object) {
         try {
-            x.get("before").invoke(object);
+            if (x.get("before") != null)
+                x.get("before").invoke(object);
         } catch (IllegalAccessException | InvocationTargetException e) {
             System.out.println(e.getMessage());
         }
@@ -59,7 +60,8 @@ public class Runner {
 
     private void runAfter(Object object) {
         try {
-            x.get("after").invoke(object);
+            if (x.get("after") != null)
+                x.get("after").invoke(object);
         } catch (IllegalAccessException | InvocationTargetException e) {
             System.out.println(e.getMessage());
         }
