@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class Runner {
 
-    private final Class<?> testClass;
+    private final Class testClass;
     private Set<Method> tests = new HashSet<>();
     private Map<String, Method> x = new HashMap<>();
 
@@ -28,9 +28,13 @@ public class Runner {
                 tests.add(method);
             }
             if (method.isAnnotationPresent(Before.class)) {
+                if (x.containsKey("before"))
+                    throw new RuntimeException("More than one @Before handler defined");
                 x.put("before", method);
             }
             if (method.isAnnotationPresent(After.class)) {
+                if (x.containsKey("after"))
+                    throw new RuntimeException("More than one @After handler defined");
                 x.put("after", method);
             }
         }
@@ -49,13 +53,16 @@ public class Runner {
         }
     }
 
-    private void runBefore(Object object) {
+    private boolean runBefore(Object object) {
         try {
-            if (x.get("before") != null)
+            if (x.get("before") != null) {
                 x.get("before").invoke(object);
+                return true;
+            }
         } catch (IllegalAccessException | InvocationTargetException e) {
             System.out.println(e.getMessage());
         }
+        return false;
     }
 
     private void runAfter(Object object) {
