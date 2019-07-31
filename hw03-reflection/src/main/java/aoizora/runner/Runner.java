@@ -16,6 +16,8 @@ public class Runner {
     private final Class testClass;
     private Set<Method> tests = new HashSet<>();
     private Map<String, Method> x = new HashMap<>();
+    private final String BEFORE = "before";
+    private final String AFTER = "after";
 
     public Runner(Class<?> test) {
         this.testClass = test;
@@ -28,14 +30,14 @@ public class Runner {
                 tests.add(method);
             }
             if (method.isAnnotationPresent(Before.class)) {
-                if (x.containsKey("before"))
+                if (x.containsKey(BEFORE))
                     throw new RuntimeException("More than one @Before handler defined");
-                x.put("before", method);
+                x.put(BEFORE, method);
             }
             if (method.isAnnotationPresent(After.class)) {
-                if (x.containsKey("after"))
+                if (x.containsKey(AFTER))
                     throw new RuntimeException("More than one @After handler defined");
-                x.put("after", method);
+                x.put(AFTER, method);
             }
         }
     }
@@ -55,8 +57,8 @@ public class Runner {
 
     private boolean runBefore(Object object) {
         try {
-            if (x.get("before") != null) {
-                x.get("before").invoke(object);
+            if (x.containsKey(BEFORE)) {
+                x.get(BEFORE).invoke(object);
                 return true;
             }
         } catch (IllegalAccessException | InvocationTargetException e) {
@@ -67,8 +69,8 @@ public class Runner {
 
     private void runAfter(Object object) {
         try {
-            if (x.get("after") != null)
-                x.get("after").invoke(object);
+            if (x.containsKey(AFTER))
+                x.get(AFTER).invoke(object);
         } catch (IllegalAccessException | InvocationTargetException e) {
             System.out.println(e.getMessage());
         }
