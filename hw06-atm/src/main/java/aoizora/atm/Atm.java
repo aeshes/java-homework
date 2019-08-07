@@ -16,24 +16,24 @@ public class Atm {
     }
 
     public void oneSlot(Banknote banknote) {
-        if (banknote.getValue() != 1) {
-            throw new RuntimeException("Incorrect value: " + banknote.getValue());
-        }
+        checkIsValueCorrect(banknote.getValue(), 1);
         accept(banknote);
     }
 
     public void fiveSlot(Banknote banknote) {
-        if (banknote.getValue() != 5) {
-            throw new RuntimeException("Incorrect value: " + banknote.getValue());
-        }
+        checkIsValueCorrect(banknote.getValue(), 5);
         accept(banknote);
     }
 
     public void tenSlot(Banknote banknote) {
-        if (banknote.getValue() != 10) {
-            throw new RuntimeException("Incorrect value: " + banknote.getValue());
-        }
+        checkIsValueCorrect(banknote.getValue(), 10);
         accept(banknote);
+    }
+
+    private void checkIsValueCorrect(int value, int expected) {
+        if (value != expected) {
+            throw new RuntimeException("Incorrect value: " + value);
+        }
     }
 
     private void accept(Banknote banknote) {
