@@ -3,7 +3,6 @@ package aoizora.atm;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,5 +36,10 @@ class AtmTest {
         List<Banknote> actual = atm.withdraw(13);
         List<Banknote> expected = Arrays.asList(Banknote.ten(), Banknote.one(), Banknote.one(), Banknote.one());
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void exception() {
+        assertThrows(RuntimeException.class, () -> atm.withdraw(1488));
     }
 }
