@@ -41,6 +41,9 @@ public class Atm {
     }
 
     public List<Banknote> withdraw(int value) {
+
+        checkBalance(value);
+
         List<Banknote> result = new ArrayList<>();
         while (money >= 10 && value >= 10) {
             result.add(Banknote.ten());
@@ -61,6 +64,11 @@ public class Atm {
         }
 
         return result;
+    }
+
+    private void checkBalance(int value) {
+        if (money < value)
+            throw new RuntimeException("Not enough money");
     }
 
     public long getCacheBalance() {
