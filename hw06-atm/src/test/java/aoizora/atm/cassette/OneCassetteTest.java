@@ -23,13 +23,13 @@ class OneCassetteTest {
 
     @Test
     public void count() {
-        assertEquals(100, cassette.getCount());
+        assertEquals(100, cassette.getBanknoteCount());
     }
 
     @Test
     public void withdraw() {
         List<Banknote> result = cassette.withdraw(30);
         assertEquals(30, result.size());
-        assertEquals(70, cassette.getCount());
+        assertEquals(70, cassette.getBanknoteCount());
     }
 }

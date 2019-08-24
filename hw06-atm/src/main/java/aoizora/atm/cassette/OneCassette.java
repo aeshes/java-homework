@@ -17,8 +17,14 @@ public class OneCassette implements Cassette {
         this.count++;
     }
 
-    public int getCount() {
+    @Override
+    public int getBanknoteCount() {
         return count;
+    }
+
+    @Override
+    public Banknote getBanknoteType() {
+        return Banknote.ONE;
     }
 
     public List<Banknote> withdraw(int count) {

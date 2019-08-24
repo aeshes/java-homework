@@ -7,5 +7,6 @@ import java.util.List;
 public interface Cassette {
     void insert(Banknote banknote);
     List<Banknote> withdraw(int count);
-    int getCount();
+    int getBanknoteCount();
+    Banknote getBanknoteType();
 }
