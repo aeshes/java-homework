@@ -15,7 +15,7 @@ class OneCassetteTest {
 
     @BeforeEach
     public void before() {
-        cassette = new OneCassette();
+        cassette = new OneCassette(0);
         for (int i = 0; i < 100; i++) {
             cassette.insert(Banknote.ONE);
         }

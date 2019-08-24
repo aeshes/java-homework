@@ -2,6 +2,7 @@ package aoizora.atm.cassette;
 
 import aoizora.atm.Banknote;
 import aoizora.atm.types.Cassette;
+import aoizora.atm.visitor.CassetteVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,10 @@ import java.util.List;
 public class OneCassette implements Cassette {
 
     private int count;
+
+    public OneCassette(int count) {
+        this.count = count;
+    }
 
     @Override
     public void insert(Banknote banknote) {
@@ -38,5 +43,10 @@ public class OneCassette implements Cassette {
             this.count--;
         }
         return result;
+    }
+
+    @Override
+    public long accept(CassetteVisitor visitor) {
+        return visitor.visit(this);
     }
 }
