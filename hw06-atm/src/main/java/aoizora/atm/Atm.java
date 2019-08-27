@@ -7,28 +7,37 @@ import aoizora.atm.types.Cassette;
 import aoizora.atm.visitor.BalanceVisitor;
 import aoizora.atm.visitor.CassetteVisitor;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class Atm {
 
     private Cassette ones = new OneCassette(1000);
     private Cassette fives = new FiveCassette(1000);
     private Cassette tens = new TenCassette(1000);
 
+    private Map<Integer, Cassette> cassettes = Stream.of(new Object[][] {
+            {Banknote.ONE.getNominal(), new OneCassette(1000)},
+            {Banknote.FIVE.getNominal(), new FiveCassette(1000)},
+            {Banknote.TEN.getNominal(), new TenCassette(1000)}
+    }).collect(Collectors.toMap(data -> (Integer) data[0], data -> (Cassette) data[1]));
+
     public void oneSlot(Banknote banknote) {
-        ones.insert(banknote);
+        cassettes.get(banknote.getNominal()).insert(banknote);
     }
 
     public void fiveSlot(Banknote banknote) {
-        fives.insert(banknote);
+        cassettes.get(banknote.getNominal()).insert(banknote);
     }
 
     public void tenSlot(Banknote banknote) {
-        tens.insert(banknote);
+        cassettes.get(banknote.getNominal()).insert(banknote);
     }
 
     public long totalBalance() {
-        CassetteVisitor visitor = new BalanceVisitor();
-        return ones.accept(visitor)
-                + fives.accept(visitor)
-                + tens.accept(visitor);
+        return cassettes.entrySet().stream()
+                .map(entry -> entry.getKey() * entry.getValue().getBanknoteCount())
+                .reduce(0, (a, b) -> a + b);
     }
 }

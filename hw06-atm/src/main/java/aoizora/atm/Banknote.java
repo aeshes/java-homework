@@ -1,7 +1,17 @@
 package aoizora.atm;
 
 public enum Banknote {
-    ONE,
-    FIVE,
-    TEN
+    ONE(1),
+    FIVE(5),
+    TEN(10);
+
+    Banknote(int nominal) {
+        this.nominal = nominal;
+    }
+
+    public int getNominal() {
+        return nominal;
+    }
+
+    private int nominal;
 }
