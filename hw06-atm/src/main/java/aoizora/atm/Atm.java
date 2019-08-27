@@ -32,6 +32,6 @@ public class Atm {
     public long totalBalance() {
         return cassettes.entrySet().stream()
                 .map(entry -> entry.getKey() * entry.getValue().getBanknoteCount())
-                .reduce(0, (a, b) -> a + b);
+                .reduce(0, Integer::sum);
     }
 }
