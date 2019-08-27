@@ -4,18 +4,12 @@ import aoizora.atm.cassette.FiveCassette;
 import aoizora.atm.cassette.OneCassette;
 import aoizora.atm.cassette.TenCassette;
 import aoizora.atm.types.Cassette;
-import aoizora.atm.visitor.BalanceVisitor;
-import aoizora.atm.visitor.CassetteVisitor;
 
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Atm {
-
-    private Cassette ones = new OneCassette(1000);
-    private Cassette fives = new FiveCassette(1000);
-    private Cassette tens = new TenCassette(1000);
 
     private Map<Integer, Cassette> cassettes = Stream.of(new Object[][] {
             {Banknote.ONE.getNominal(), new OneCassette(1000)},
