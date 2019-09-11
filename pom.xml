@@ -15,6 +15,7 @@
         <com.google.guava.version>28.0-jre</com.google.guava.version>
         <maven.assembly.plugin.version>3.1.1</maven.assembly.plugin.version>
         <junit.version>5.5.0</junit.version>
+        <lombok.version>1.18.10</lombok.version>
     </properties>
 
     <modules>
@@ -40,6 +41,12 @@
                 <artifactId>junit-jupiter-api</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.8</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
