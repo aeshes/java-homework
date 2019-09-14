@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Account {
     @Id
-    private Integer id;
-    private Integer amount;
+    private int id;
+    private int amount;
     private String type;
 }

@@ -1,30 +1,47 @@
 package aoizora;
 
+import aoizora.base.Visitor;
 import aoizora.db.ConnectionManager;
-import aoizora.domain.User;
-import aoizora.orm.Executor;
+import aoizora.domain.Account;
+import aoizora.logic.LogVisitor;
+import aoizora.types.TraversedArray;
+import aoizora.types.TraversedPrimitive;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.sql.Connection;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalAccessException {
         Connection connection = ConnectionManager.getConnection();
-        Executor.execUpdate(connection,
-                new String[] { "create table user(id integer, name varchar(255), email varchar(255), password varchar(255))"});
-        Executor.execUpdate(connection,
-                new String[] {
-                        "insert into user(id, name, email, password) values (1, 'Haruhi', 'haruhi@gmail.com', '123')"
-                });
-        User user = Executor.execQuery(connection, "select * from user where id = 1", rs -> {
-            rs.next();
-            User result = new User();
-            result.setId(rs.getInt("id"));
-            result.setName(rs.getString("name"));
-            result.setEmail(rs.getString("email"));
-            result.setPassword(rs.getString("password"));
-            return result;
-        });
-        System.out.println(user);
+
+        Account account = new Account(1, 1000, "test");
+        LogVisitor visitor = new LogVisitor();
+        traverse(account, visitor);
+        System.out.println(visitor.getPrimitives());
+    }
+
+    private static void traverse(Object object, Visitor visitor) throws IllegalAccessException {
+
+        Field[] fields = object.getClass().getDeclaredFields();
+
+        for (Field field: fields) {
+            field.setAccessible(true);
+
+            if (Modifier.isStatic(field.getModifiers())) {
+                continue;
+            }
+
+            if (field.getType().isPrimitive()) {
+                new TraversedPrimitive(field).accept(visitor);
+            }
+            else if (field.getType().isArray()) {
+                new TraversedArray(field, field).accept(visitor);
+            }
+            else {
+                traverse(field.get(object), visitor);
+            }
+        }
     }
 }
