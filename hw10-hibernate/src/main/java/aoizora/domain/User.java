@@ -8,7 +8,7 @@ import java.util.Objects;
 public class User extends IdentifiableObject {
 
     private String name;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Address address;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Phone> phone;
