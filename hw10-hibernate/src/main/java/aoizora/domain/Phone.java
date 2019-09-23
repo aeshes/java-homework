@@ -9,7 +9,7 @@ public class Phone extends IdentifiableObject {
 
     private String number;
     @ManyToOne
-    @JoinColumn(name = "fk_user")
+    @JoinColumn(name = "fk_user", nullable = false)
     private User user;
 
     public Phone() {

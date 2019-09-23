@@ -10,8 +10,7 @@ public class User extends IdentifiableObject {
     private String name;
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Phone> phone;
 
     public User() {
