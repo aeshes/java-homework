@@ -40,6 +40,8 @@ public class Main {
 
             User loadedUser = session.get(User.class, id);
             System.out.println(loadedUser);
+
+            assert loadedUser.equals(user);
         }
     }
 
