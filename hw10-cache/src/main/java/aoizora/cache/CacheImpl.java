@@ -13,14 +13,28 @@ public class CacheImpl<K, V> implements CacheHw<K, V> {
 
     private Map<K, V> cache = new WeakHashMap<>();
 
-    private List<SoftReference<HwListener>> listeners = new ArrayList<>();
+    private List<SoftReference<HwListener<K, V>>> listeners = new ArrayList<>();
 
 
     public void put(K key, V value) {
+        for (SoftReference<HwListener<K, V>> listener : listeners) {
+            HwListener<K, V> l = listener.get();
+            if (l != null) {
+                l.notify(key, value, "put");
+            }
+        }
+
         cache.put(key, value);
     }
 
     public void remove(K key) {
+        for (SoftReference<HwListener<K, V>> listener : listeners) {
+            HwListener<K, V> l = listener.get();
+            if (l != null) {
+                l.notify(key, cache.get(key), "remove");
+            }
+        }
+
         cache.remove(key);
     }
 
