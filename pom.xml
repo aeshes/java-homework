@@ -15,12 +15,14 @@
         <com.google.guava.version>28.0-jre</com.google.guava.version>
         <maven.assembly.plugin.version>3.1.1</maven.assembly.plugin.version>
         <junit.version>5.5.0</junit.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     </properties>
 
     <modules>
         <module>hw01-maven</module>
         <module>hw02-arraylist</module>
         <module>hw03-reflection</module>
+        <module>hw06-atm</module>
     </modules>
 
     <dependencyManagement>
@@ -45,5 +47,17 @@
     </dependencyManagement>
 
     <packaging>pom</packaging>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>
